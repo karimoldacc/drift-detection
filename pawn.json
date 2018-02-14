@@ -1,0 +1,9 @@
+{
+	"user": "ltkarim",
+	"repo": "drift-detection",
+	"entry": "test.pwn",
+	"output": "test.amx",
+	"dependencies": [
+		"Southclaws/samp-stdlib"
+	]
+}
