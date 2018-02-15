@@ -76,7 +76,7 @@ enum e_DRIFT_PLAYER_STRUCT {
 #endif
 
 static g_DriftPlayers[MAX_PLAYERS][e_DRIFT_PLAYER_STRUCT];
-static DriftOptions: g_DriftFlags;
+static DriftOptions: g_DriftFlags = DRIFT_CHECK_ENABLED | DAMAGE_CHECK_ENABLED;
 
 // internal functions
 static bool: IsModelACar(modelid) 
@@ -98,7 +98,7 @@ public OnPlayerUpdate(playerid)
         if(GetTickCount() > g_DriftPlayers[playerid][lastTimestamp])
         {
             new vehicleID = GetPlayerVehicleID(playerid);
-            if( vehicleID && GetPlayerState(playerid) == PLAYER_STATE_DRIVER && IsModelACar(GetVehicleModel(vehicleID)))
+            if(vehicleID && GetPlayerState(playerid) == PLAYER_STATE_DRIVER && IsModelACar(GetVehicleModel(vehicleID)))
             {
                 new Float: vX, Float: vY, Float: vZ;
                 GetVehicleVelocity(vehicleID, vX, vY, vZ);
