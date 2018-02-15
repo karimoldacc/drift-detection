@@ -162,7 +162,7 @@ public OnPlayerUpdate(playerid)
                                 #endif
                             }
                         }
-                        else if(MIN_DRIFT_ANGLE <= driftAngle <= MAX_DRIFT_ANGLE && speed >= MIN_DRIFT_SPEED)
+                        if(MIN_DRIFT_ANGLE <= driftAngle <= MAX_DRIFT_ANGLE && speed >= MIN_DRIFT_SPEED)
                         {
                             g_DriftPlayers[playerid][timeoutTicks] = 0;
                             
