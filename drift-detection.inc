@@ -321,7 +321,7 @@ stock bool: Drift::IsPlayerDrifting(playerid)
     #define _ALS_OnPlayerStateChange  
 #endif
 
-#define OnPlayerStateChang Drift_OnPlayerStateChange 
+#define OnPlayerStateChange Drift_OnPlayerStateChange 
 #if defined Drift_OnPlayerStateChange 
     forward Drift_OnPlayerStateChange(playerid, newstate, oldstate);
 #endif
