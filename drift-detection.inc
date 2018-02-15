@@ -21,22 +21,22 @@
 #define Drift:: Drift_
 
 // constants
-#define MIN_DRIFT_ANGLE     (8.0)   // minimum drift angle to start a drift
+#define MIN_DRIFT_ANGLE     (12.0)   // minimum drift angle to start a drift
 #define MAX_DRIFT_ANGLE     (80.0)  // maximum drift angle to start a drift
-#define MIN_DRIFT_SPEED     (45.0)  // minimum speed to start a drift
+#define MIN_DRIFT_SPEED     (55.0)  // minimum speed to start a drift
 
 #define DRIFT_PROCESS_INTERVAL    (250)     // delay interval between each tick in ms
 #define DRIFT_TIMEOUT_INTERVAL    (6)       // how much ticks before a drift ends after the player stops drifting
 
 // drift ending reasons
 enum {
-    DRIFT_END_REASON_TIMEOUT = 0, 
+    DRIFT_END_REASON_TIMEOUT, 
     DRIFT_END_REASON_DAMAGED, 
     DRIFT_END_REASON_OTHER 
 }
 // drift states
 enum {
-    DRIFT_STATE_NONE = 0,
+    DRIFT_STATE_NONE,
     DRIFT_STATE_DRIFTING
 }
 
