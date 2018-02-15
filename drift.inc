@@ -128,13 +128,12 @@ public OnPlayerUpdate(playerid)
                     case DRIFT_STATE_NONE:
                     {
                         if(MIN_DRIFT_ANGLE <= driftAngle <= MAX_DRIFT_ANGLE && speed >= MIN_DRIFT_SPEED)
-                        {
-                        
+                        {                        
                             g_DriftPlayers[playerid][driftState] = DRIFT_STATE_DRIFTING;
                             g_DriftPlayers[playerid][startTimestamp] = GetTickCount();
 
                             GetVehicleHealth(vehicleID, g_DriftPlayers[playerid][vHealth]);
-                            GetPlayerPos(playerid, g_DriftPlayers[playerid][startPosX], g_DriftPlayers[playerid][startPosY], vZ);
+                            GetPlayerPos(playerid, g_DriftPlayers[playerid][startPosX], g_DriftPlayers[playerid][startPosY], g_DriftPlayers[playerid][startPosZ]);
                             
                             #if defined OnPlayerDriftStart
                                 OnPlayerDriftStart(playerid);
