@@ -48,8 +48,8 @@ forward	OnPlayerDriftEnd(playerid, reason, Float: distance, time);
 
 ### Drift End Reasons
 
-* **DRIFT_END_REASON_TIMEOUT**: player stopped drifting.
-* **DRIFT_END_REASON_OTHER**: player leaving his vehicle, leaving the server, or vehicle explodes.
+* **DRIFT_END_REASON_TIMEOUT**: player has stopped drifting for N * delay interval. 
+* **DRIFT_END_REASON_OTHER**: player left his vehicle or disconencted from the server.
 * **DRIFT_END_REASON_DAMAGED**: vehicle is damaged (only when DamageCheck is enabled)
 
 
