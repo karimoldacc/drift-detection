@@ -262,9 +262,17 @@ stock Drift::SetMinAngle(Float: angle)
         g_MinDriftAngle = angle;
     }
 }
+stock Float: Drift::GetMinAngle()
+{
+    return g_MinDriftAngle;
+}
 stock Drift::SetMinSpeed(Float: speed)
 {
     g_MinDriftSpeed = speed;
+}
+stock Float: Drift::GetMinSpeed()
+{
+    return g_MinDriftSpeed;
 }
 stock Drift::EnableDetection(playerid = -1)
 {
