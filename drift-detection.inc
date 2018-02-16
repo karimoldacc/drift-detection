@@ -4,9 +4,9 @@
 	Description:
 		An include which detects drifting with useful callbacks and functions for whoever working in a drift gamemode, racing system or a minigame.
 	Latest Update Date:
-		14-Feb-2018
+		16-Feb-2018
 	Version:
-		1.0.0
+		1.1.0
 */
 
 // include guard to avoid duplication
@@ -23,7 +23,7 @@
 // constants
 #define MIN_DRIFT_ANGLE     (12.0)   // minimum drift angle to start a drift
 #define MAX_DRIFT_ANGLE     (80.0)  // maximum drift angle to start a drift
-#define MIN_DRIFT_SPEED     (55.0)  // minimum speed to start a drift
+#define MIN_DRIFT_SPEED     (45.0)  // minimum speed to start a drift
 
 #define DRIFT_PROCESS_INTERVAL    (250)     // delay interval between each tick in ms
 #define DRIFT_TIMEOUT_INTERVAL    (6)       // how much ticks before a drift ends after the player stops drifting
@@ -78,6 +78,10 @@ enum e_DRIFT_PLAYER_STRUCT {
 static g_DriftPlayers[MAX_PLAYERS][e_DRIFT_PLAYER_STRUCT];
 static DriftOptions: g_DriftFlags = DRIFT_CHECK_ENABLED | DAMAGE_CHECK_ENABLED;
 
+static Float: g_MinDriftAngle = MIN_DRIFT_ANGLE;
+static Float: g_MinDriftSpeed = MIN_DRIFT_SPEED;
+static g_DriftTimeoutTicks = DRIFT_TIMEOUT_INTERVAL;
+ 
 // internal functions
 static bool: IsModelACar(modelid) 
 {
@@ -127,7 +131,7 @@ public OnPlayerUpdate(playerid)
                 {
                     case DRIFT_STATE_NONE:
                     {
-                        if(MIN_DRIFT_ANGLE <= driftAngle <= MAX_DRIFT_ANGLE && speed >= MIN_DRIFT_SPEED)
+                        if(g_MinDriftAngle <= driftAngle <= MAX_DRIFT_ANGLE && speed >= g_MinDriftSpeed)
                         {                        
                             g_DriftPlayers[playerid][driftState] = DRIFT_STATE_DRIFTING;
                             g_DriftPlayers[playerid][startTimestamp] = GetTickCount();
@@ -162,7 +166,7 @@ public OnPlayerUpdate(playerid)
                                 #endif
                             }
                         }
-                        if(MIN_DRIFT_ANGLE <= driftAngle <= MAX_DRIFT_ANGLE && speed >= MIN_DRIFT_SPEED)
+                        if(g_MinDriftAngle <= driftAngle <= MAX_DRIFT_ANGLE && speed >= g_MinDriftSpeed)
                         {
                             g_DriftPlayers[playerid][timeoutTicks] = 0;
                             
@@ -174,7 +178,7 @@ public OnPlayerUpdate(playerid)
                         {
                             g_DriftPlayers[playerid][timeoutTicks]++;
 
-                            if(g_DriftPlayers[playerid][timeoutTicks] >= DRIFT_TIMEOUT_INTERVAL)
+                            if(g_DriftPlayers[playerid][timeoutTicks] >= g_DriftTimeoutTicks)
                             {
                                 GetPlayerPos(playerid, vX, vY, vZ);
                                 
@@ -251,6 +255,17 @@ public OnPlayerDisconnect(playerid, reason)
 }
 
 // option functions
+stock Drift::SetMinAngle(Float: angle)
+{
+    if(angle < MAX_DRIFT_ANGLE)
+    {
+        g_MinDriftAngle = angle;
+    }
+}
+stock Drift::SetMinSpeed(Float: speed)
+{
+    g_MinDriftSpeed = speed;
+}
 stock Drift::EnableDetection(playerid = -1)
 {
     if(playerid != -1 && 0 <= playerid < MAX_PLAYERS)
@@ -297,7 +312,7 @@ stock bool: Drift::IsDamageCheckEnabled(playerid = -1)
     {
         return (g_DriftPlayers[playerid][playerFlags] & DAMAGE_CHECK_ENABLED) ? true : false;
     }
-    else (g_DriftFlags & DAMAGE_CHECK_ENABLED) ? true : false;
+    else return (g_DriftFlags & DAMAGE_CHECK_ENABLED) ? true : false;
 }
 stock bool: Drift::IsPlayerDrifting(playerid)
 {

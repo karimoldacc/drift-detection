@@ -3,7 +3,8 @@
 #include "drift-detection.inc"
 
 main() {
-	
+	Drift::SetMinAngle(15.0);
+	Drift::SetMinSpeed(45.0);
 }
 
 public OnPlayerCommandText(playerid, cmdtext[])
