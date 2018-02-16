@@ -274,6 +274,14 @@ stock Float: Drift::GetMinSpeed()
 {
     return g_MinDriftSpeed;
 }
+stock Drift::SetTimeoutTicks(ticks)
+{
+    g_DriftTimeoutTicks = ticks;
+}
+stock Drift::GetTimeoutTicks()
+{
+    return g_DriftTimeoutTicks;
+}
 stock Drift::EnableDetection(playerid = -1)
 {
     if(playerid != -1 && 0 <= playerid < MAX_PLAYERS)
